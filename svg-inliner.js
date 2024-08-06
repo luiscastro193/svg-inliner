@@ -13,6 +13,5 @@ function inject() {
 	document.body.querySelectorAll('img[data-inline]').forEach(inline);
 }
 
-const observer = new MutationObserver(inject);
-observer.observe(document, {subtree: true, childList: true});
+new MutationObserver(inject).observe(document, {subtree: true, childList: true});
 inject();
