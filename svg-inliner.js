@@ -9,9 +9,19 @@ function inline(svg) {
 	request(svg.src).then(response => response.text()).then(html => {svg.outerHTML = html});
 }
 
+let pending = false;
+
 function inject() {
+	pending = false;
 	document.body.querySelectorAll('img[data-inline]').forEach(inline);
 }
 
-new MutationObserver(inject).observe(document, {subtree: true, childList: true});
-inject();
+function requestInject() {
+	if (!pending) {
+		pending = true;
+		setTimeout(inject, 0);
+	}
+}
+
+new MutationObserver(requestInject).observe(document, {subtree: true, childList: true});
+requestInject();
