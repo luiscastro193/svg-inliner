@@ -4,9 +4,9 @@ async function request(resource, options) {
 	if (response.ok) return response; else throw response;
 }
 
-export default function inline(svg) {
+export default async function inline(svg) {
 	svg.removeAttribute('data-inline');
-	return request(svg.src).then(response => response.text()).then(html => {svg.outerHTML = html});
+	svg.outerHTML = await (await request(svg.src)).text();
 }
 
 let pending = false;
