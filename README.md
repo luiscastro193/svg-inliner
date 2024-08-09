@@ -1,2 +1,2 @@
 # svg-inliner
-Simple SVG inliner
+Lightweight and comfortable SVG inliner
