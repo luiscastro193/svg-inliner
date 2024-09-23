@@ -6,12 +6,12 @@ async function request(resource, options) {
 
 function debounce(callback) {
 	let pending = false;
-	return () => {
+	return (...args) => {
 		if (!pending) {
 			pending = true;
 			setTimeout(() => {
 				pending = false;
-				callback();
+				callback(...args);
 			}, 0);
 		}
 	}
